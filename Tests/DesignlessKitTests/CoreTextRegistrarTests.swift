@@ -5,10 +5,10 @@
 /// and Flutter that is asserted through a stub: the real font manager is not
 /// reachable from a test process. Here it is.
 ///
-/// These run against a real Inter TTF and the real
-/// `CTFontManagerRegisterGraphicsFont`, and then ask Core Text for the face by
-/// name. If the rule this whole family is built around were wrong, this is
-/// where it would show.
+/// These run against a real Inter TTF and the real font manager, then ask Core
+/// Text for the face by name. If the rule this whole family is built around
+/// were wrong, this is where it would show — and on the first run it was: the
+/// claim about family names was refuted here and rewritten.
 
 import CoreGraphics
 import CoreText
@@ -87,6 +87,36 @@ final class CoreTextRegistrarTests: XCTestCase {
             XCTAssertEqual(expected, "Inter-SemiBold")
             XCTAssertEqual(actual, "Inter-Regular")
         }
+    }
+
+    func testTheFaceIsStagedToDiskBecauseTheCurrentApiRegistersFromAFile() throws {
+        // Pins the choice, not just the outcome. Registration goes through
+        // CTFontManagerRegisterFontsForURL, which is current on every
+        // platform, rather than CTFontManagerRegisterGraphicsFont, which is
+        // deprecated on macOS 15. The observable difference is that the bytes
+        // reach disk.
+        //
+        // The path the deprecation notice actually suggests —
+        // CTFontManagerCreateFontDescriptorsFromData +
+        // RegisterFontDescriptors — was tried and registers nothing at process
+        // scope (error 303), so following the notice would have silently put
+        // every custom font back to Helvetica.
+        try CoreTextRegistrar.register("Inter-Regular", interBytes)
+
+        let staged = CoreTextRegistrar.stagingDirectory
+            .appendingPathComponent("Inter-Regular.font")
+        XCTAssertTrue(FileManager.default.fileExists(atPath: staged.path))
+    }
+
+    func testAFaceThatDisagreesWithTheBrandNeverReachesDisk() {
+        // The name check runs before anything is written, so a bad file does
+        // not litter the staging directory or reach Core Text.
+        let staged = CoreTextRegistrar.stagingDirectory
+            .appendingPathComponent("Nonexistent-Face.font")
+        try? FileManager.default.removeItem(at: staged)
+
+        XCTAssertThrowsError(try CoreTextRegistrar.register("Nonexistent-Face", interBytes))
+        XCTAssertFalse(FileManager.default.fileExists(atPath: staged.path))
     }
 
     func testRegisteringTheSameFaceTwiceIsNotAFailure() throws {

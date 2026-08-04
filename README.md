@@ -74,6 +74,12 @@ if let name = body.postscriptName {
 
 Substitution is reported rather than passed off as a match. A family publishing only Light, answering a request for Medium, looks exactly like a font that was applied.
 
+### How registration works, and one trap
+
+Registration goes through `CTFontManagerRegisterFontsForURL`, which is current on every Apple platform. The bytes are written to disk first — no cost, since they are being cached anyway — and the PostScript name baked into the file is checked against the one the brand advertises before anything is registered. A file that disagrees is refused at that moment rather than missing every lookup later.
+
+If you are hand-rolling this: `CTFontManagerRegisterGraphicsFont` is deprecated on macOS 15, and the replacement its notice suggests — `CTFontManagerCreateFontDescriptorsFromData` plus `CTFontManagerRegisterFontDescriptors` — **does not work for runtime-downloaded fonts**. At process scope with descriptors built from in-memory data it reports `CTFontManagerErrorDomain` code 303 and registers nothing, so every lookup falls through to the system font. Following the deprecation notice looks like the responsible move and silently breaks every custom font in the app. Register from a file URL instead.
+
 ## Changes land when you say so
 
 A brand can change while your app is open. `UIAppearance` is applied when a view enters a window and does not restyle views already on screen, so a mid-session swap gets you a half-updated app rather than an updated one. A fetched change is **held**:
