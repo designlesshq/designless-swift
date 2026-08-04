@@ -1,0 +1,88 @@
+{
+  "$schema": "designless-fonts/v1",
+  "version": "1.0.3",
+  "formats": {
+    "web": "woff2",
+    "native": "ttf"
+  },
+  "families": [
+    {
+      "family": "Inter",
+      "roles": [
+        "body"
+      ],
+      "faces": [
+        {
+          "weight": 400,
+          "style": "normal",
+          "postscriptName": "Inter-Regular",
+          "src": {
+            "woff2": "https://cdn.designless.app/fonts/google/inter/400-normal.woff2",
+            "ttf": "https://cdn.designless.app/fonts/google/inter/400-normal.ttf"
+          }
+        },
+        {
+          "weight": 600,
+          "style": "normal",
+          "postscriptName": "Inter-SemiBold",
+          "src": {
+            "woff2": "https://cdn.designless.app/fonts/google/inter/600-normal.woff2",
+            "ttf": "https://cdn.designless.app/fonts/google/inter/600-normal.ttf"
+          }
+        }
+      ]
+    },
+    {
+      "family": "EB Garamond",
+      "roles": [
+        "display"
+      ],
+      "faces": [
+        {
+          "weight": 400,
+          "style": "normal",
+          "postscriptName": "EBGaramond-Regular",
+          "src": {
+            "woff2": "https://cdn.designless.app/fonts/google/eb-garamond/400-normal.woff2",
+            "ttf": "https://cdn.designless.app/fonts/google/eb-garamond/400-normal.ttf"
+          }
+        },
+        {
+          "weight": 600,
+          "style": "normal",
+          "postscriptName": "EBGaramond-SemiBold",
+          "src": {
+            "woff2": "https://cdn.designless.app/fonts/google/eb-garamond/600-normal.woff2",
+            "ttf": "https://cdn.designless.app/fonts/google/eb-garamond/600-normal.ttf"
+          }
+        }
+      ]
+    },
+    {
+      "family": "JetBrains Mono",
+      "roles": [
+        "mono"
+      ],
+      "faces": [
+        {
+          "weight": 400,
+          "style": "normal",
+          "postscriptName": "JetBrainsMono-Regular",
+          "src": {
+            "woff2": "https://cdn.designless.app/fonts/google/jetbrains-mono/400-normal.woff2",
+            "ttf": "https://cdn.designless.app/fonts/google/jetbrains-mono/400-normal.ttf"
+          }
+        },
+        {
+          "weight": 600,
+          "style": "normal",
+          "postscriptName": "JetBrainsMono-SemiBold",
+          "src": {
+            "woff2": "https://cdn.designless.app/fonts/google/jetbrains-mono/600-normal.woff2",
+            "ttf": "https://cdn.designless.app/fonts/google/jetbrains-mono/600-normal.ttf"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,151 @@
+{
+  "$schema": "designless-context/v1",
+  "public_id": "_designless",
+  "version": "1.0.3",
+  "protocol": "https://cdn.designless.app/serve/protocol.v1.json",
+  "capabilities": [
+    {
+      "name": "tokens",
+      "auth": "none",
+      "description": "Resolved brand token values, for mapping onto a platform theme."
+    },
+    {
+      "name": "assets",
+      "auth": "none",
+      "description": "Brand marks, addressable by role, format, appearance and size."
+    },
+    {
+      "name": "fonts",
+      "auth": "none",
+      "description": "Font files to download and register, for platforms that do not load them."
+    },
+    {
+      "name": "events",
+      "auth": "none",
+      "description": "A stream that signals when this brand changes."
+    }
+  ],
+  "fetch": {
+    "styles": {
+      "url": "https://cdn.designless.app/r/_designless/live.css",
+      "type": "text/css"
+    },
+    "tokens": {
+      "url": "https://cdn.designless.app/r/_designless/tokens.json",
+      "type": "application/json",
+      "schema": "designless-tokens/v1"
+    },
+    "tree": {
+      "url": "https://cdn.designless.app/r/_designless/live.json",
+      "type": "application/json"
+    },
+    "fonts": {
+      "url": "https://cdn.designless.app/r/_designless/fonts.json",
+      "type": "application/json",
+      "schema": "designless-fonts/v1"
+    },
+    "events": {
+      "url": "https://cdn.designless.app/r/_designless/events",
+      "type": "text/event-stream"
+    }
+  },
+  "assets": [
+    {
+      "role": "logo-symbol",
+      "formats": [
+        "svg",
+        "png"
+      ],
+      "variants": [
+        "dark",
+        "light"
+      ],
+      "url": "https://cdn.designless.app/r/_designless/assets/logo-symbol.svg"
+    },
+    {
+      "role": "wordmark",
+      "formats": [
+        "svg",
+        "png"
+      ],
+      "variants": [
+        "dark",
+        "light"
+      ],
+      "url": "https://cdn.designless.app/r/_designless/assets/wordmark.svg"
+    }
+  ],
+  "compositions": [
+    {
+      "name": "app-icon",
+      "url": "https://cdn.designless.app/r/_designless/assets/app-icon.png",
+      "width": 1024,
+      "height": 1024,
+      "rationale": "logo-symbol on a square canvas, with clear space of 0.1 of its long edge set by the destination rather than by the brand."
+    },
+    {
+      "name": "app-icon-android-background",
+      "url": "https://cdn.designless.app/r/_designless/assets/app-icon-android-background.png",
+      "width": 432,
+      "height": 432,
+      "rationale": "the brand's own ground, with no mark on it."
+    },
+    {
+      "name": "app-icon-android-foreground",
+      "url": "https://cdn.designless.app/r/_designless/assets/app-icon-android-foreground.png",
+      "width": 432,
+      "height": 432,
+      "rationale": "logo-symbol on a square canvas, with clear space of 0.25 of its long edge set by the destination rather than by the brand."
+    },
+    {
+      "name": "app-icon-mac",
+      "url": "https://cdn.designless.app/r/_designless/assets/app-icon-mac.png",
+      "width": 1024,
+      "height": 1024,
+      "rationale": "logo-symbol on a square canvas, with clear space of 0.1 of its long edge set by the destination rather than by the brand."
+    },
+    {
+      "name": "apple-touch-icon",
+      "url": "https://cdn.designless.app/r/_designless/assets/apple-touch-icon.png",
+      "width": 180,
+      "height": 180,
+      "rationale": "logo-symbol on a square canvas, with clear space of 0.1 of its long edge set by the destination rather than by the brand."
+    },
+    {
+      "name": "email-header",
+      "url": "https://cdn.designless.app/r/_designless/assets/email-header.png",
+      "width": 600,
+      "height": 200,
+      "rationale": "wordmark on a wide canvas, with clear space of 0.15 of its long edge."
+    },
+    {
+      "name": "favicon",
+      "url": "https://cdn.designless.app/r/_designless/assets/favicon.ico",
+      "width": 48,
+      "height": 48,
+      "rationale": "logo-symbol on a square canvas, with clear space of 0 of its long edge set by the destination rather than by the brand."
+    },
+    {
+      "name": "icon-mask",
+      "url": "https://cdn.designless.app/r/_designless/assets/icon-mask.png",
+      "width": 512,
+      "height": 512,
+      "rationale": "logo-symbol on a square canvas, with clear space of 0.1 of its long edge."
+    },
+    {
+      "name": "og-image",
+      "url": "https://cdn.designless.app/r/_designless/assets/og-image.png",
+      "width": 1200,
+      "height": 630,
+      "rationale": "wordmark on a wide canvas, with clear space of 0.15 of its long edge."
+    }
+  ],
+  "appearance": [
+    "light",
+    "dark"
+  ],
+  "reserved": [
+    "assets.json",
+    "catalog.json"
+  ]
+}

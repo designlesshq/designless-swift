@@ -1,0 +1,139 @@
+{
+  "$schema": "designless-serve-protocol/v1",
+  "version": "v1",
+  "addresses": [
+    {
+      "pattern": "/r/{public_id}/live.css",
+      "description": "Brand stylesheet, including @font-face."
+    },
+    {
+      "pattern": "/r/{public_id}/tokens.json",
+      "description": "Resolved token values, envelope removed."
+    },
+    {
+      "pattern": "/r/{public_id}/live.json",
+      "description": "Resolved token tree in DTCG form."
+    },
+    {
+      "pattern": "/r/{public_id}/context.json",
+      "description": "What this brand offers, and where."
+    },
+    {
+      "pattern": "/r/{public_id}/fonts.json",
+      "description": "Fonts to download and register."
+    },
+    {
+      "pattern": "/r/{public_id}/assets/{role}.{format}",
+      "description": "A brand mark, as uploaded."
+    },
+    {
+      "pattern": "/r/{public_id}/assets/{destination}.{format}",
+      "description": "A brand mark composed for a named destination. Takes no parameters: the destination fixes the size, the ground and the treatment."
+    },
+    {
+      "pattern": "/r/{public_id}/events",
+      "description": "Brand-update stream, server-sent events."
+    }
+  ],
+  "params": {
+    "appearance": {
+      "appliesTo": [
+        "live.css",
+        "tokens.json",
+        "live.json",
+        "assets/{role}.{format}"
+      ],
+      "values": [
+        "light",
+        "dark"
+      ],
+      "default": "on live.css and the token artefacts, the brand's own default; on an uploaded asset, light",
+      "onInvalid": "400"
+    },
+    "platform": {
+      "appliesTo": [
+        "tokens.json",
+        "live.json"
+      ],
+      "values": [
+        "web",
+        "ios",
+        "android"
+      ],
+      "default": "web",
+      "onInvalid": "400"
+    },
+    "surfaceclass": {
+      "appliesTo": [
+        "tokens.json",
+        "live.json"
+      ],
+      "values": [
+        "ui",
+        "artefact"
+      ],
+      "default": "ui",
+      "onInvalid": "400"
+    },
+    "render": {
+      "appliesTo": [
+        "tokens.json",
+        "live.json"
+      ],
+      "values": [
+        "screen",
+        "print"
+      ],
+      "default": "screen",
+      "onInvalid": "400 for a value outside the list; 501 for `email`, which is reserved and may start answering after a future release."
+    },
+    "size": {
+      "appliesTo": [
+        "assets/{role}.{format}"
+      ],
+      "values": [
+        16,
+        32,
+        48,
+        64,
+        128,
+        192,
+        256,
+        512,
+        1024
+      ],
+      "default": "the size the image was uploaded at",
+      "onInvalid": "400"
+    },
+    "format": {
+      "appliesTo": [
+        "assets/{role}.{format}",
+        "assets/{destination}.{format}"
+      ],
+      "values": [
+        "svg",
+        "png"
+      ],
+      "default": "none, the extension is required",
+      "onInvalid": "404"
+    },
+    "version": {
+      "appliesTo": [
+        "live.css",
+        "tokens.json",
+        "live.json",
+        "context.json",
+        "fonts.json"
+      ],
+      "values": [],
+      "default": "the current published version",
+      "onInvalid": "400 when the value is not a version number like 1.2.0. 404 when it is a version number this brand has not published; that 404 is about the version, not the address, and it starts answering once that version is published."
+    }
+  },
+  "status": {
+    "400": "The request named a parameter value this surface does not accept. The body says which values are accepted. Fix the request.",
+    "402": "This brand's plan does not serve this artefact.",
+    "404": "Nothing is served at this address. It is not reserved and will not appear later.",
+    "501": "The address is reserved and not implemented yet. It may start answering after a future release."
+  }
+}
