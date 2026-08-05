@@ -29,16 +29,28 @@ Pod::Spec.new do |s|
 
   s.swift_versions   = ['5.9']
 
-  # These match Package.swift exactly and are not a preference. Registering a
-  # font at runtime needs Core Text, which is on every Apple platform; the
-  # floors are where async/await and the modern URLSession land, not where the
-  # brand work needs them. The stub's podspec claimed macOS 13, which excluded
-  # a version this code supports.
+  # NARROWER THAN Package.swift, on purpose, and this is the one place the two
+  # channels differ.
+  #
+  # The sources are platform-generic — Foundation, CoreText, CoreGraphics — and
+  # SPM ships all five platforms from the same code. CocoaPods lints by BUILDING
+  # against a simulator for every platform a spec declares, and `pod trunk push`
+  # has no way to skip one. Declaring tvOS, watchOS and visionOS would mean
+  # publishing three claims that were never compiled, which is the kind of
+  # unproven promise this package refuses everywhere else.
+  #
+  # So the pod declares what it validates. A tvOS or watchOS app adding this pod
+  # gets a clear "platform not supported" from CocoaPods at integration time
+  # rather than a silent surprise, and SPM — which is where those platforms
+  # actually live — carries all five.
+  #
+  # Widening is a version bump away once the simulator runtimes exist: restore
+  # the three lines and push 0.1.1. Nothing here forecloses it.
+  #
+  # The floors themselves match Package.swift. The stub's podspec claimed macOS
+  # 13, which excluded a version this code supports.
   s.ios.deployment_target     = '15.0'
   s.osx.deployment_target     = '12.0'
-  s.tvos.deployment_target    = '15.0'
-  s.watchos.deployment_target = '8.0'
-  s.visionos.deployment_target = '1.0'
 
   # Declared rather than left to autolinking, because font registration is the
   # one thing in here that fails silently when a framework is missing: a face

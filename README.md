@@ -26,7 +26,11 @@ CocoaPods:
 pod 'DesignlessKit', '~> 0.1.0'
 ```
 
-Both give you the same `DesignlessKit`. Pin `~> 0.1.0` on CocoaPods rather than taking the default: versions 0.0.1 to 0.0.3 of that pod were a name reservation that carried no code, and an unpinned install could still reach one.
+Both give you the same `DesignlessKit`, from the same tag. Two things to know:
+
+**Pin `~> 0.1.0` on CocoaPods** rather than taking the default. Versions 0.0.1 to 0.0.3 of that pod were a name reservation carrying no code, and an unpinned install could still reach one.
+
+**The pod covers iOS and macOS only.** SPM covers all five platforms. The sources are identical — Foundation, CoreText and CoreGraphics throughout — but CocoaPods validates a spec by building it against a simulator for every platform it declares, and declaring tvOS, watchOS or visionOS would publish three claims that were never compiled. For those, use SPM, which is where they largely live anyway.
 
 ## Use
 
