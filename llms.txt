@@ -1,0 +1,61 @@
+# DesignlessKit
+
+> Your brand in an iOS, macOS, tvOS, watchOS or visionOS app. Colours, type, spacing and marks come from your published brand, and change when you publish.
+
+DesignlessKit is the Apple client for [Designless](https://designless.io), expression infrastructure for coding agents. The package carries no brand data. It is a client for the addresses your brand is served at, plus the rules Core Text needs followed before a downloaded typeface will appear on a screen. It has no dependencies: HTTP is injected, so it holds no opinion about the networking an app already uses.
+
+## About Designless
+
+Designless is expression infrastructure: a runtime layer that gives coding agents access to encoded human design judgment, so the software they build carries taste and not just logic.
+
+Design systems ship a file of tokens. You export it, paste it into a codebase, and hope it stays in sync. Expression infrastructure serves design decisions at runtime instead, to the agent, at the moment it builds. Designless calls the gap between what you express and what actually gets built the Expression Gap, and closes it by making the brand available as infrastructure rather than as a document.
+
+This package is the delivery end of that: whatever an agent resolved and published as a brand, this is how an Apple app reads it at runtime.
+
+## What this package does
+
+- Reads your published brand at runtime: colour, typography, spacing, and the rest of the token tree.
+- Resolves brand marks (logos and symbols) to the addresses they are served at, in SVG or PNG, at a closed ladder of sizes.
+- Downloads and registers brand typefaces through Core Text, and reports honestly which of six outcomes a font request actually got, instead of silently substituting the system font.
+- Holds a fetched brand change until you activate it, so a brand never restyles a screen underneath someone mid-task.
+- Restores the last payload synchronously from an optional snapshot store, so the first frame is branded rather than blank.
+
+## What this package does not do
+
+- It carries no brand values of its own, so a brand change never requires a release of this package.
+- It picks no networking stack and no concurrency framework. Those are the app's choices.
+- It does not invent design values. Where a brand publishes nothing, the platform default stands.
+
+## Install
+
+Swift Package Manager:
+
+```swift
+.package(url: "https://github.com/designlesshq/designless-swift", from: "0.1.0")
+```
+
+## Key concepts
+
+- **Expression Infrastructure**: the runtime layer that makes design judgment available to agents as a service. Not a design tool and not a component library.
+- **Brand Capsule**: a self-contained, versioned, deterministic compilation of everything defining how a brand looks, feels and speaks. This package consumes what a capsule publishes.
+- **Expression Contracts**: design tokens name values; expression contracts encode intent, context and relationships. Tokens are a vocabulary list, contracts are a fluent speaker.
+- **Taste as Infrastructure**: the thesis that design judgment can be encoded, structured and served the same way logic and data are.
+
+## Sibling packages
+
+The same brand, on other platforms:
+
+- [designless-kotlin](https://github.com/designlesshq/designless-kotlin): Kotlin and Android
+- [designless-dart](https://github.com/designlesshq/designless-dart): Dart and Flutter
+- [designless-npm](https://github.com/designlesshq/designless-npm): web and React Native
+
+## Links
+
+- [README](https://github.com/designlesshq/designless-swift/blob/main/README.md): install, fonts, live updates, and the address grammar
+- [designless.io](https://designless.io): product overview and the thesis
+- [designless.live](https://designless.live): vocabulary and definitions
+- [designless.app](https://designless.app): create and publish a brand
+
+## License
+
+Apache-2.0. Copyright 2026 Designless Private Limited.
