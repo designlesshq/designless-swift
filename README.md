@@ -14,9 +14,19 @@ This package carries no brand data. It is a client for the addresses your brand 
 
 ## Install
 
+Swift Package Manager:
+
 ```swift
 .package(url: "https://github.com/designlesshq/designless-swift", from: "0.1.0")
 ```
+
+CocoaPods:
+
+```ruby
+pod 'DesignlessKit', '~> 0.1.0'
+```
+
+Both give you the same `DesignlessKit`. Pin `~> 0.1.0` on CocoaPods rather than taking the default: versions 0.0.1 to 0.0.3 of that pod were a name reservation that carried no code, and an unpinned install could still reach one.
 
 ## Use
 
