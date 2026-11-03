@@ -20,16 +20,6 @@ Swift Package Manager:
 .package(url: "https://github.com/designlesshq/designless-swift", from: "0.1.0")
 ```
 
-Swift Package Manager is the install path for every platform and for every version after 0.1.0.
-
-**CocoaPods.** CocoaPods Trunk becomes read-only on 2 Dec 2026. DesignlessKit 0.1.0 stays installable through CocoaPods, on iOS and macOS, for projects already using it:
-
-```ruby
-pod 'DesignlessKit', '~> 0.1.0'
-```
-
-Keep the `~> 0.1.0` pin. Versions 0.0.1 to 0.0.3 of that pod were a name reservation carrying no code, and an unpinned install could still reach one.
-
 ## Use
 
 ```swift
